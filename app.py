@@ -1,31 +1,32 @@
 import os
-import pymongo
+from flask import (
+    Flask, flash, render_template,
+    redirect, request, session, url_for)
+from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 if os.path.exists("env.py"):
     import env
 
 
-MONGO_URI = os.environ.get("MONGO_URI")
-DATABASE = "HelloYou"
-COLLECTION = "allbooks"
+app = Flask(__name__)
+
+app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+app.secret_key = os.environ.get("SECRET_KEY")
+
+mongo = PyMongo(app)
 
 
-def mongo_connect(url):
-    try:
-        conn = pymongo.MongoClient(url)
-        print("Mongo is connected")
-        return conn
-    except pymongo.errors.ConnectionFailure as e:
-        print("Could not connect to MongoDB: %s") % e
+@app.route("/")
+@app.route("/landing.html")
+def landing():
+    """My Websites Homepage.
+    Returns:
+        renders template homepage.html
+    """
+    return render_template("landing.html")
 
-
-conn = mongo_connect(MONGO_URI)
-
-coll = conn[DATABASE][COLLECTION]
-
-documents = coll.find()
-
-""" Insert a single document """
-
-
-for doc in documents:
-    print(doc)
+if __name__ == "__main__":
+    app.run(host=os.environ.get("IP"),
+            port=int(os.environ.get("PORT")),
+            debug=True)
