@@ -18,15 +18,15 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
-@app.route("/landing.html")
-def landing():
+@app.route("/home")
+def homepage():
     """My Websites Homepage.
     Returns:
         renders template homepage.html
     """
-    return render_template("landing.html")
+    return render_template("homepage.html")
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
-            port=int(os.environ.get("PORT")),
+            port=int(os.environ.get("PORT","5000")),
             debug=True)
