@@ -1,0 +1,17 @@
+
+html {
+  height: 100%;
+}
+
+body {
+  color: #0d2920;
+}
+
+
+/* full page background */
+
+.full-page {
+  background: url("../images/helloyoubg.jpg") center center no-repeat fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
