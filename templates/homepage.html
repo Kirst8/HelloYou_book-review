@@ -3,6 +3,104 @@
 {% block content %}
 <!--intro homepage-->
 <div class="full-page">
-    
+      <!-- Overlay & flexbox container -->
+  <div class="min-vh-100 rgba-black-light d-flex justify-content-center align-items-center title">
+    <section class="container">
+      <div class="row fadeIn">
+        <!-- If user is just arrived on HTML page user will see -->
+        {% if "user" is in session %}
+        <!-- single column -->
+        <div class="col-md-12 white-text text-center">
+          <!-- Main Heading -->
+          <h1 class="display-3 font-weight-bold">Hello You</h1>
+          <hr class="hr-light" />
+          <!-- page info -->
+          <p class="font-weight-bold">
+            Have you to here for some books to review
+          </p>
+          <p class="mb-4 d-none d-md-block font-weight-bold">
+              Here you can join an book club where you add your own reviews books and update your reading list as ypu go along 
+      
+          </p>
+          <!-- Quick Links -->
+          <a href="{{ url_for('get_books') }}" class="btn btn-indigo btn-lg mb-2">
+            View All Books
+            <i class="fas fa-book-open ml-2"></i>
+          </a>
+          <a href="{{ url_for('account', user=session['user']) }}" class="btn btn-indigo btn-lg mb-2">
+            View Profile
+            <i class="fas fa-user"></i>
+          </a>
+        </div>
+        <!-- if user is not in session -->
+        {% else %}
+        <!-- First column -->
+        <div class="col-md-6 mb-4 white-text text-center text-md-left">
+          <!-- Main Heading -->
+          <h1 class="display-4 font-weight-bold">Welcome to BookClub</h1>
+          <hr class="hr-light" />
+          <!-- page info -->
+          <p class="font-weight-bold">
+           Have you come here for books to review.
+          </p>
+          <p class="mb-4 d-none d-md-block font-weight-bold">
+           Here you can join an book club where you add your own reviews books and update your reading list as you go along. 
+          </p>
+        </div>
+        <!-- Second column -->
+        <div class="col-md-6 col-xl-5 mb-4">
+          <!-- Card -->
+          <div class="card">
+            <div class="card-body">
+              <!-- Form -->
+              <form name="registration" method="POST" action="{{ url_for('register') }}">
+                <!-- Heading -->
+                <h3 class="dark-grey-text text-center">
+                  <strong>Sign Up Today!!</strong>
+                </h3>
+                <hr />
+                <!-- Username Input -->
+                <div class="md-form">
+                  <i class="fas fa-user prefix grey-text"></i>
+                  <input type="text" id="user" class="form-control validate" name="user" autocomplete="username" required />
+                  <label for="user">Username</label>
+                </div>
+                <!-- Email Input-->
+                <div class="md-form">
+                  <i class="fas fa-envelope prefix grey-text"></i>
+                  <input type="text" id="email" class="form-control validate" name="email" required />
+                  <label for="email">Email</label>
+                </div>
+                <!-- Password Input-->
+                <div class="md-form">
+                  <i class="fas fa-key prefix grey-text"></i>
+                  <input type="password" id="pass" class="form-control validate" name="pass" autocomplete="new-password" required />
+                  <label for="pass">Password</label>
+                </div>
+                <!-- ReType Password Input-->
+                <div class="md-form">
+                  <i class="fas fa-key prefix grey-text"></i>
+                  <input type="password" id="pass2" class="form-control validate" name="pass2" autocomplete="new-password" required />
+                  <label for="pass2">Retype Password</label>
+                </div>
+                <!-- Buttons -->
+                <div class="text-center">
+                  <!-- Sign up button -->
+                  <button class="btn btn-indigo">Sign Up!</button>
+                  <!-- Login button which opens modal -->
+                  <a href="" class="btn btn-indigo btn" data-toggle="modal" data-target="#modalLoginForm">
+                    Log in
+                    <i class="fas fa-sign-in-alt ml-2"></i>
+                  </a>
+                  <hr />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </section>
+  </div>
 </div>
 {% endblock %}
