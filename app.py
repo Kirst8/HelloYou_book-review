@@ -38,7 +38,7 @@ def books():
 @app.route("/")
 @app.route("/all_reviews")
 def all_reviews():
-    tasks = mongo.db.tasks.find()
+    all_reviews = mongo.db.tasks.find()
     return render_template("all_reviews.html",all_reviews=all_reviews)
 
 
