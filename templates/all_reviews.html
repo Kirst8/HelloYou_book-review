@@ -1,0 +1,17 @@
+<!--extends to base html-->
+{% set active_page = "books" %} 
+{% extends "base.html" %}
+{% block content %}
+<div class="full-page">
+  <!-- container needs to 100vh for mobile -->
+  <div class="min-vh-100 white container title">
+       {% for books in allbooks %}
+        {{ allbooks.book_title }}<br>
+        {{ allbooks.author }}<br>
+        {{ allbooks.review }}<br>
+        {{ allbooks.category }}<br>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

@@ -1,12 +1,25 @@
+<!--extends to base html-->
+{% set active_page = "books" %} 
 {% extends "base.html" %}
 {% block content %}
-
-
-    {% for books in allbooks %}
+<div class="full-page">
+  <!-- container needs to 100vh for mobile -->
+  <div class="min-vh-100 white container title">
+      <!--Sort books-->
+<div class="sort">
+        Sort By:
+        <a href="{{ url_for('books') }}">Title</a> 
+</div>
+       {% for books in allbooks %}
+        <div class="row text-center w-100 justify-content-center">
+      
         {{ allbooks.book_title }}<br>
         {{ allbooks.author }}<br>
         {{ allbooks.review }}<br>
         {{ allbooks.category }}<br>
     {% endfor %}
+  </div>
+</div>
+</div>
 
 {% endblock %}
