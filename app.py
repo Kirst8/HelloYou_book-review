@@ -4,6 +4,7 @@ from flask import (
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from function import isValid
 if os.path.exists("env.py"):
     import env
 
@@ -32,7 +33,7 @@ def homepage():
 @app.route("/books")
 def books():
     allbooks = mongo.db.allbooks.find()
-    return render_template("books.html", allbook=allbooks)
+    return render_template("books.html", allbooks=allbooks)
 
 
 @app.route("/")
