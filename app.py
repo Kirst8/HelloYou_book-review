@@ -28,6 +28,20 @@ def homepage():
     return render_template("homepage.html")
 
 
+@app.route("/")
+@app.route("/books")
+def books():
+    allbooks = mongo.db.allbooks.find()
+    return render_template("books.html", allbook=allbooks)
+
+
+@app.route("/")
+@app.route("/all_reviews")
+def all_reviews():
+    tasks = mongo.db.tasks.find()
+    return render_template("all_reviews.html",all_reviews=all_reviews)
+
+
 @app.route("/register", methods=["POST"])
 def register():
     """Register an account on the website.
@@ -39,17 +53,10 @@ def register():
     users database along with the hashed password and the username input is set
     to session['user']
     
-    Returns:
-        If existing_user found then you are redirected to the homepage with a
-        user already exists Toastr message.
-        If existing_email found then you are redirected to the homepage with a
-        email already exists Toastr message.
-        If email passed into isValid function is false then you are redirected
-        to the homepage and an invalid email message.
-        If both password inputs do not match then you are again redirected to
-        the homepage and a passwords do not match message is displayed.
-        If the above all fail then you are redirected to your new account page,
-        with your inputted username being passed as the user variable.
+    Returns:Existing user =
+    email =
+    password=
+    name=
     """
     existing_user = mongo.db.users.find_one({"user": request.form["user"]})
     existing_email = mongo.db.users.find_one({
@@ -78,6 +85,12 @@ def register():
     session["user"] = request.form["user"]
     flash("Successfully Signed Up!", "success")
     return redirect(url_for("account", user=session["user"]))
+
+
+
+
+
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),

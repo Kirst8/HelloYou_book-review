@@ -2,8 +2,6 @@ import os
 from flask import Flask, session, flash, redirect, url_for
 import re
 
-
-
 def isValid(email):
     """Checks for valid email addresses
     On the register form needs a genuine emails so isvalid to
