@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+    {% for books in allbooks %}
+        {{ allbooks.book_title }}<br>
+        {{ allbooks.author }}<br>
+        {{ allbooks.review }}<br>
+        {{ allbooks.category }}<br>
+    {% endfor %}
+
+{% endblock %}
