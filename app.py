@@ -5,6 +5,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from function import isValid
+from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
 
@@ -29,64 +30,41 @@ def homepage():
     return render_template("homepage.html")
 
 
-@app.route("/")
+
 @app.route("/books")
 def books():
     allbooks = mongo.db.allbooks.find()
     return render_template("books.html", allbooks=allbooks)
 
 
-@app.route("/")
 @app.route("/all_reviews")
 def all_reviews():
     all_reviews = mongo.db.tasks.find()
     return render_template("all_reviews.html",all_reviews=all_reviews)
 
-
-@app.route("/register", methods=["POST"])
+@app.route("/register", methods=["GET", "POST"])
 def register():
-    """Register an account on the website.
-    URL uses a form action request on the homepage register form,
-    the POST method used to get the form data is passed through the following
-    validations As existing user, existing email, valid email using
-    isValid() function implemented and matching passwords, if all fail then
-    The form data is then inserted into the Users into the database and has encoded password
-    users database along with the hashed password and the username input is set
-    to session['user']
-    
-    Returns:Existing user =
-    email =
-    password=
-    name=
-    """
-    existing_user = mongo.db.users.find_one({"user": request.form["user"]})
-    existing_email = mongo.db.users.find_one({
-        "email": request.form["email"]})
+    if request.method == "POST":
+        # check if username already exists in db
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username")})
 
-    if existing_user:
-        flash("That username already exists! Try Again!", "error")
-        return redirect(url_for("homepage"))
-    if existing_email:
-        flash("That email already exists! Try Again!", "error")
-        return redirect(url_for("homepage"))
-    if isValid(request.form["email"]) is False:
-        flash("Invalid Email", "error")
-        return redirect(url_for("homepage"))
-    if request.form["pass"] != request.form["pass2"]:
-        flash("Passwords do not match!", "error")
-        return redirect(url_for("homepage"))
-    hashpass = bcrypt.hashpw(
-        request.form["pass"].encode("utf-8"), bcrypt.gensalt()
-    )
-    mongo.db.users.insert(
-        {"user": request.form["user"],
-         "password": hashpass,
-         "email": request.form["email"],
-         "profile_image": ""})
-    session["user"] = request.form["user"]
-    flash("Successfully Signed Up!", "success")
-    return redirect(url_for("account", user=session["user"]))
+        if existing_user:
+            flash("Username already exists")
+            return redirect(url_for("register"))
 
+        register = {
+            "username": request.form.get("username"),
+            "password": generate_password_hash(request.form.get("password"))
+        }
+        mongo.db.users.insert_one(register)
+
+        # put the new user into 'session' cookie
+        session["user"] = request.form.get("username")
+        flash("Registration Successful!")
+        return redirect(url_for("profile", username=session["user"]))
+
+    return render_template("account.html")
 
 
 
