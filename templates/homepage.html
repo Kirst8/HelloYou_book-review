@@ -12,7 +12,7 @@
         <!-- single column -->
         <div class="col-md-12 white-text text-center">
           <!-- Main Heading -->
-          <h1 class="display-3 font-weight-bold">Hello You</h1>
+          <h1 class="display-3 font-weight-bold">Hello{{ user.user.capitalize()}}</h1>
           <hr class="hr-light" />
           <!-- page info -->
           <p class="font-weight-bold">
@@ -27,7 +27,7 @@
             View All Books
             <i class="fas fa-book-open ml-2"></i>
           </a>
-          <a href="{{ url_for('register', user=session['user']) }}" class="btn btn-indigo btn-lg mb-2">
+          <a href="{{ url_for('profile', user=session['user']) }}" class="btn btn-indigo btn-lg mb-2">
             View Profile
             <i class="fas fa-user"></i>
           </a>
@@ -37,7 +37,7 @@
         <!-- First column -->
         <div class="col-md-6 mb-4 white-text text-center text-md-left">
           <!-- Main Heading -->
-          <h1 class="display-4 font-weight-bold">Welcome to BookClub</h1>
+          <h1 class="display-4 font-weight-bold">Hello You</h1>
           <hr class="hr-light" />
           <!-- page info -->
           <p class="font-weight-bold">
@@ -53,7 +53,7 @@
           <div class="card">
             <div class="card-body">
               <!-- Form -->
-              <form name="registration" method="POST" action="{{ url_for('register') }}">
+              <form name="sign-up-form" method="POST" action="{{ url_for('profile') }}">
                 <!-- Heading -->
                 <h3 class="dark-grey-text text-center">
                   <strong>Sign Up Today!!</strong>
@@ -62,33 +62,26 @@
                 <!-- Username Input -->
                 <div class="sign-up-form">
                   <i class="fas fa-user prefix grey-text"></i>
-                  <input type="text" id="user" class="form-control validate" name="user" autocomplete="username" required />
-                  <label for="user">Username</label>
+                <input id="username" name="username" type="text" minlength="5"
+                            maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
+						<label for="username">Username</label>
                 </div>
                 <!-- Email Input-->
-                <div class="sign-up-form">
-                  <i class="fas fa-envelope prefix grey-text"></i>
-                  <input type="text" id="email" class="form-control validate" name="email" required />
-                  <label for="email">Email</label>
-                </div>
+               
                 <!-- Password Input-->
                 <div class="sign-up-form">
                   <i class="fas fa-key prefix grey-text"></i>
-                  <input type="password" id="pass" class="form-control validate" name="pass" autocomplete="new-password" required />
-                  <label for="pass">Password</label>
+                  <input id="password" name="password" type="password" minlength="5"
+                            maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
+                        <label for="password">Password</label>
                 </div>
                 <!-- ReType Password Input-->
-                <div class="sign-up-form">
-                  <i class="fas fa-key prefix grey-text"></i>
-                  <input type="password" id="pass2" class="form-control validate" name="pass2" autocomplete="new-password" required />
-                  <label for="pass2">Retype Password</label>
-                </div>
                 <!-- Buttons -->
                 <div class="text-center">
                   <!-- Sign up button -->
                   <button class="btn btn-indigo">Sign Up!</button>
                   <!-- Login button which opens modal -->
-                  <a href="" class="btn btn-indigo btn" data-toggle="modal" data-target="#modalLoginForm">
+                  <a href="" class="waves-light btn modal-trigger" data-toggle="modal" data-target="#modalLoginForm">
                     Log in
                     <i class="fas fa-sign-in-alt ml-2"></i>
                   </a>

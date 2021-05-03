@@ -1,0 +1,17 @@
+<!-- Joins onto base.html, variable active_page set as account -->
+{% extends "base.html" %} 
+{% set active_page = "account" %} 
+{% block content %}
+<div class="full-page">
+    <!--container height and margin-->
+    <div class="min-100vh container-white pt-5">
+         <!-- User account info section -->
+      <section class="col-md-5 mb-4 mt-5 d-flex align-items-center flex-column">
+          <!--Welcome message for logged in user-->
+          <h1 class="mt-5 pb-4 text-center">Hello-{{ user.user.capitalize() }}</h1>
+          
+
+      </section>
+    </div>
+</div>
+{% endblock %}
