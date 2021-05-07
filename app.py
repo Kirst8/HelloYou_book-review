@@ -13,10 +13,10 @@ if os.path.exists("env.py"):
 app = Flask(__name__)
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
-app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
-app.config["SECRET_KEY"]= os.environ.get("SECRET_KEY")
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI","mongodb://localhost")
+app.secret_key= os.environ.get("SECRET_KEY")
 
-# Pass the Flask App to the pymongo() method
+# Pass the Flask App to the pymongo() method 
 mongo = PyMongo(app)
 
 
@@ -39,8 +39,8 @@ def books():
 
 @app.route("/all_reviews")
 def all_reviews():
-    all_reviews = mongo.db.tasks.find()
-    return render_template("all_reviews.html",all_reviews=all_reviews)
+    allreviews = mongo.db.allreviews.find()
+    return render_template("all_reviews.html",allreviews=allreviews)
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
@@ -50,10 +50,10 @@ def profile():
 
     if request.method == "POST":
 
-        existing_username = mongo.db.users.find_one(
+        existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
 
-        if existing_username:
+        if existing_user:
             flash("Username already exists")
             return redirect(url_for('sign_up'))
 
@@ -93,7 +93,15 @@ def login():
             flash("Incorect Username and/or Password")
             return redirect(url_for('login'))
 
-    return render_template('login.html')
+    return render_template('login_modal.html')
+
+
+@app.route("/logout")
+def logout():
+    # remove user from session cookie
+    flash("You have been logged out")
+    session.pop("user")
+    return redirect(url_for("homepage"))
 
 
 
