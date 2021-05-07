@@ -1,4 +1,2 @@
-// modal trigger
-$(document).ready(function(){
-    $('.modal').modal();
-});
+// Get the modal
+var myModal = new bootstrap.Modal(document.getElementById('myModal'),)
