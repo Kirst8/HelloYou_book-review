@@ -5,21 +5,31 @@
 <div class="full-page">
   <!-- container needs to 100vh for mobile -->
   <div class="min-vh-100 white container title">
+<!--heading and flex container-->
+<section class="d-flex algin items center flex-column">
+    <h1 class="display-4">All Books</h1>
       <!--Sort books-->
 <div class="sort">
-        Sort By:
-        <a href="{{ url_for('books') }}">Title</a> 
+   Sort By:
+        <a href="{{ url_for('books') }}">Title</a> /
+        <a href="{{ url_for('books') }}">author</a>/
+        <a href="{{ url_for('books') }}">review</a>/
+        <a href="{{ url_for('books') }}">category</a>
 </div>
-       {% for books in allbooks %}
-        <div class="row text-center w-100 justify-content-center">
-      
-        {{ allbooks.book_title }}<br>
-        {{ allbooks.author }}<br>
-        {{ allbooks.review }}<br>
-        {{ allbooks.category }}<br>
-    {% endfor %}
+<div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="book cover">
+  <div class="card-body">
+       {% for books in allbooks %} 
+    <h5 class="card-title">{{ allbooks.book_title }}</h5>
+      {% endfor %}
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+</div>
   </div>
 </div>
 </div>
+<!--end section-->
+</section>
+
 
 {% endblock %}

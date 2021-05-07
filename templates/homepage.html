@@ -12,7 +12,7 @@
         <!-- single column -->
         <div class="col-md-12 white-text text-center">
           <!-- Main Heading -->
-          <h1 class="display-3 font-weight-bold">Hello{{ user.user.capitalize()}}</h1>
+          <h1 class="display-3 font-weight-bold">Hello{{user}}</h1>
           <hr class="hr-light" />
           <!-- page info -->
           <p class="font-weight-bold">
@@ -66,7 +66,6 @@
                             maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
 						<label for="username">Username</label>
                 </div>
-                <!-- Email Input-->
                
                 <!-- Password Input-->
                 <div class="sign-up-form">
@@ -79,12 +78,13 @@
                 <!-- Buttons -->
                 <div class="text-center">
                   <!-- Sign up button -->
-                  <button class="btn btn-indigo">Sign Up!</button>
+                  <button type="submit" class="btn btn-indigo">Sign Up!</button>
                   <!-- Login button which opens modal -->
-                  <a href="" class="waves-light btn modal-trigger" data-toggle="modal" data-target="#modalLoginForm">
-                    Log in
-                    <i class="fas fa-sign-in-alt ml-2"></i>
-                  </a>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                 Login</button>    
+                       
+                   
+              
                   <hr />
                 </div>
               </form>
