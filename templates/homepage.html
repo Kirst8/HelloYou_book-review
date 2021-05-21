@@ -1,99 +1,44 @@
-{% extends "base.html" %} 
-{% set active_page = "home" %} 
+{% extends "base.html" %}
 {% block content %}
-<!--intro homepage-->
-<div class="full-page">
-      <!-- Overlay & flexbox container -->
-  <div class="min-vh-100 rgba-grey-light d-flex justify-content-center align-items-center title">
-    <section class="container">
-      <div class="row fadeIn">
-        <!-- If user is just arrived on HTML page user will see -->
-        {% if "user" is in session %}
-        <!-- single column -->
-        <div class="col-md-12 white-text text-center">
-          <!-- Main Heading -->
-          <h1 class="display-3 font-weight-bold">Hello{{user}}</h1>
-          <hr class="hr-light" />
-          <!-- page info -->
-          <p class="font-weight-bold">
-            Have you to here for some books to review
-          </p>
-          <p class="mb-4 d-none d-md-block font-weight-bold">
-              Here you can join an book club where you add your own reviews books and update your reading list as ypu go along 
-      
-          </p>
-          <!-- Quick Links -->
-          <a href="{{ url_for('books') }}" class="btn btn-indigo btn-lg mb-2">
-            View All Books
-            <i class="fas fa-book-open ml-2"></i>
-          </a>
-          <a href="{{ url_for('profile', user=session['user']) }}" class="btn btn-indigo btn-lg mb-2">
-            View Profile
-            <i class="fas fa-user"></i>
-          </a>
-        </div>
-        <!-- if user is not in session -->
-        {% else %}
-        <!-- First column -->
-        <div class="col-md-6 mb-4 white-text text-center text-md-left">
-          <!-- Main Heading -->
-          <h1 class="display-4 font-weight-bold">Hello You</h1>
-          <hr class="hr-light" />
-          <!-- page info -->
-          <p class="font-weight-bold">
-           Have you come here for books to review.
-          </p>
-          <p class="mb-4 d-none d-md-block font-weight-bold">
-           Here you can join an book club where you add your own reviews books and update your reading list as you go along. 
-          </p>
-        </div>
-        <!-- Second column -->
-        <div class="col-md-6 col-xl-5 mb-4">
-          <!-- Card -->
-          <div class="card">
-            <div class="card-body">
-              <!-- Form -->
-              <form name="sign-up-form" method="POST" action="{{ url_for('profile') }}">
-                <!-- Heading -->
-                <h3 class="dark-grey-text text-center">
-                  <strong>Sign Up Today!!</strong>
-                </h3>
-                <hr />
-                <!-- Username Input -->
-                <div class="sign-up-form">
-                  <i class="fas fa-user prefix grey-text"></i>
-                <input id="username" name="username" type="text" minlength="5"
-                            maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
-						<label for="username">Username</label>
-                </div>
-               
-                <!-- Password Input-->
-                <div class="sign-up-form">
-                  <i class="fas fa-key prefix grey-text"></i>
-                  <input id="password" name="password" type="password" minlength="5"
-                            maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
-                        <label for="password">Password</label>
-                </div>
-                <!-- ReType Password Input-->
-                <!-- Buttons -->
-                <div class="text-center">
-                  <!-- Sign up button -->
-                  <button type="submit" class="btn btn-indigo">Sign Up!</button>
-                  <!-- Login button which opens modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                 Login</button>    
-                       
-                   
-              
-                  <hr />
-                </div>
-              </form>
+
+    <div class="full-page">
+        <div class=row>
+            <div class="col s6 align-centre">
+             <h1 class="white-text heading">Hello You</h1>   
+            
+             <h5 class="white-text text-lighten-3">
+                Have you come to reaview some books
+            </h5>            
+            <h5 class="white-text text-lighten-3">            
+                Our community provides value to visitors by sharing their favourite personal development books.
+            </h5>
             </div>
-          </div>
+            <div class=row>
+            <div class="col s6 align-centre">
+            <div class="row">
+              <div class="col s12 m6">
+               <div class="card blue-grey darken-1">
+                 <div class="card-content white-text">
+                <span class="card-title">Card Title</span>
+            <p>I am a very simple card. I am good at containing small bits of information.
+            I am convenient because I require little markup to use effectively.</p>
+             </div>
+            <div class="card-action">
+            <a href="#">This is a link</a>
+            <a href="#">This is a link</a>
+            </div>
+            </div>
+            </div>
+        <!--end col6 no2 div-->
         </div>
-        {% endif %}
-      </div>
-    </section>
-  </div>
+    <!--end row no2 div-->  
+    </div>  
+
+<!--end col6 No1 div-->
+    </div>
+ <!--end row div-->   
+ </div>
+<!--end full page container-->    
 </div>
+
 {% endblock %}

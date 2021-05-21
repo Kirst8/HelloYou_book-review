@@ -1,35 +1,90 @@
-<!--extends to base html-->
-{% set active_page = "books" %} 
 {% extends "base.html" %}
 {% block content %}
-<div class="full-page">
-  <!-- container needs to 100vh for mobile -->
-  <div class="min-vh-100 white container title">
-<!--heading and flex container-->
-<section class="d-flex algin items center flex-column">
-    <h1 class="display-4">All Books</h1>
-      <!--Sort books-->
-<div class="sort">
-   Sort By:
-        <a href="{{ url_for('books') }}">Title</a> /
-        <a href="{{ url_for('books') }}">author</a>/
-        <a href="{{ url_for('books') }}">review</a>/
-        <a href="{{ url_for('books') }}">category</a>
-</div>
-<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="book cover">
-  <div class="card-body">
-       {% for books in allbooks %} 
-    <h5 class="card-title">{{ allbooks.book_title }}</h5>
-      {% endfor %}
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-</div>
-  </div>
-</div>
-</div>
-<!--end section-->
-</section>
 
+<div class="container">
+
+    <h3 class="white header center-align">Book Reviews</h3>
+
+    <div class="row">
+        <div class="col s12 m6 offset-m3 card-panel grey lighten-5">
+            <form action="{{ url_for('search') }}" method="post" class="col s12">
+                <div class="row valign-wrapper center-align">
+                    <div class="input-field col s12">
+                        <i class="fas fa-search prefix light-blue-text text-darken-4"></i>
+                        <input type="text" name="query" id="query" minlength="3" class="validate" required>
+                        <label for="query">Search Book Titles, category and Reviews</label>
+                    </div>
+                </div>
+                <div class="row valign-wrapper center-align">
+                    <div class="col s12">
+                        <a href="{{ url_for('get_books') }}" class="red btn text-shadow"><i
+                                class="fas fa-sync left"></i> Reset</a>
+                        <button type="submit" class="light-blue darken-1 btn text-shadow">
+                            <i class="fas fa-search left"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if allbooks|length > 0 %}
+    <div class="container wide-container">
+        <div class="row">
+            {% for allbooks in allbooks %}
+            <div class="col s12 m6 l4">
+                <div class="card large hoverable books">
+                    <!-- Need to check with tutor support how to fix this -->
+                    <div class="card-action">
+                        <span class="card-title activator grey-text text-darken-4">Expand review details<i
+                                class="fa fa-ellipsis-v right"></i></span>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><i class="fa fa-times right"></i></span>
+                        <h5>{{ allbooks.book_title }}: by {{ allbooks.author }}</h5>
+                        category: {{ allbooks.category }}<br>
+                        <i class="fas fa-star"></i> Rating: {{ allbooks.rating }} /5<br>
+                        <p>
+                            Review: <br>
+                            {{ allbooks.review }}
+                        </p>
+                        <p><em>by: {{ allbooks.created_by }} </em></p>
+                        <!-- buy button shows where a value exists, can only be added by "admin" -->
+                            {% if allbooks.buy_link != null %}
+                                <a href="{{ allbooks.buy_link }}" class="btn-small green waves-effect waves-green"
+                                    target="_blank"><i class="fas fa-shopping-basket left"></i>Buy</a>
+                            {% endif %}
+                        <!-- Buy, Remove and Edit buttons with Admin having full access -->
+                        {% if session.user|lower == allbooks.created_by|lower or session.user|lower == "admin"|lower %}                                                    
+                            <a href="#a{{ allbooks._id }}" class="btn-small red accent-4 modal-trigger"><i class="fas fa-trash-alt left"></i>Delete</a>
+                            <a href="{{ url_for('edit_book', allbooks_id=allbooks._id) }}"
+                                class="btn-small light-blue accent-4"><i class="fas fa-edit left"></i>Edit</a>
+                        {% endif %}
+                    </div>
+                </div>
+            
+            <!-- Warning to Delete Modal -->
+            <div id="a{{ allbooks._id }}" class="modal">
+                <div class="modal-content">
+                    <h4>Warning</h4>
+                    <p>Are you sure you want to delete this review?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ url_for('get_books') }}" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+                    <a href="{{ url_for('delete_book', allbooks_id=allbooks._id) }} " class="waves-effect waves-green btn-flat">Delete</a>
+                </div>
+            </div>
+            
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <h3 class="red text-darken-4 center-align">No Results Found</h3>
+    {% endif %}
+
+    
+
+</div>
 
 {% endblock %}
