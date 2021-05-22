@@ -12,7 +12,7 @@ body {
 /* full page background */
 
 .full-page {
-  background: url("../images/libarbg.jpg") center center no-repeat fixed;
+  background: url("../images/bookshelve.jpg") center center no-repeat fixed;
   background-size: cover;
   min-height: 100vh;
 }
