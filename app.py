@@ -178,7 +178,7 @@ def add_review():
     if "user" in session:
         if request.method == "POST":
             allbooks = {
-                "genre_name": request.form.get("genre_name"),
+                "category_name": request.form.get("category_name"),
                 "book_title": request.form.get("book_title"),
                 "author": request.form.get("author"),
                 "review": request.form.get("review"),
@@ -216,11 +216,11 @@ def edit_book(allbooks_id):
         if allbooks["created_by"] == username or session["user"] == "admin":
             if request.method == "POST":
                 submit = {
-                    "genre_name": request.form.get("genre_name"),
+                    "category_name": request.form.get("category_name"),
                     "book_title": request.form.get("book_title"),
                     "author": request.form.get("author"),
-                    "book_review": request.form.get("book_review"),
-                    "book_rating": request.form.get("book_rating"),
+                    "review": request.form.get("review"),
+                    "rating": request.form.get("rating"),
                     "image_url": request.form.get("image_url"),
                     "buy_link": request.form.get("buy_link"),
                     "created_by": session["user"]
@@ -264,15 +264,15 @@ def delete_book(allboosk_id):
     return redirect(url_for("login"))
 
 
-@app.route("/get_genres")
-def get_genres():
-    """get_genres:
-    * Allows admin to access the manage genres\
+@app.route("/get_category")
+def get_category():
+    """get_cat:
+    * Allows admin to access the manage category\
         page.
     \n Args:
     * None.
     \n Returns:
-    * Renders manage genres webpage.
+    * Category.html webpage.
     """
 
     if "user" in session:
@@ -286,10 +286,10 @@ def get_genres():
     return redirect(url_for("login"))
 
 
-@app.route("/add_genre", methods=["GET", "POST"])
-def add_genre():
-    """add_genre:
-    * Allows admin to add new genres.
+@app.route("/add_category", methods=["GET", "POST"])
+def add_Catergory():
+    """add_cat:
+    * Allows admin to add new category.
     \n Args:
     * None.
     \n Returns:
@@ -300,9 +300,9 @@ def add_genre():
         if session["user"] == "admin":
             if request.method == "POST":
                 genre = {
-                    "genre_name": request.form.get("genre_name")
+                    "category_name": request.form.get("category_name")
                 }
-                mongo.db.genres.insert_one(genre)
+                mongo.db.genres.insert_one(category)
                 flash("New Category Added")
                 return redirect(url_for("get_Category"))
 
@@ -315,7 +315,7 @@ def add_genre():
 
 @app.route("/edit_genre/<category_id>", methods=["GET", "POST"])
 def edit_catergory(category_id):
-    """edit_genre:
+    """edit_cat:
     * Allows admin to update genres.
     \n Args:
     * genre_id
@@ -356,7 +356,7 @@ def delete_category(category_id):
         if session["user"] == "admin":
 
             mongo.db.category.remove({"_id": ObjectId(category_id)})
-            flash("Genre Successfully Deleted")
+            flash("Category Successfully Deleted")
             return redirect(url_for("get_category"))
 
         return redirect(url_for("get_books"))
