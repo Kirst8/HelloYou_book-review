@@ -313,10 +313,10 @@ def add_Catergory():
     return redirect(url_for("login"))
 
 
-@app.route("/edit_genre/<category_id>", methods=["GET", "POST"])
+@app.route("/edit_category/<category_id>", methods=["GET", "POST"])
 def edit_catergory(category_id):
     """edit_cat:
-    * Allows admin to update genres.
+    * Allows admin to update category html 
     \n Args:
     * genre_id
     \n Returns:
@@ -402,8 +402,8 @@ def service_unavailable(e):
 
     return render_template("error.html"), 503
 
-
+# change to debug=False before submission!
 if __name__ == "__main__":
-    app.run(host=os.environ.get("IP"),
-            port=int(os.environ.get("PORT","5000")),
-            debug=True)
+       app.run(host=os.environ.get("IP"),
+            port=int(os.environ.get("PORT")),
+            debug=os.environ.get("DEBUG"))
