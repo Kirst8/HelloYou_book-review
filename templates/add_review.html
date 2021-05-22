@@ -7,12 +7,12 @@
     
     <div class="row card-panel grey lighten-5">
         <form class="col s12" method="POST" action="{{ url_for('add_review') }}">
-            <!-- book genre selection -->
+            <!-- book cat selection -->
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-filter prefix light-blue-text text-darken-4"></i>
-                    <select id="genre_name" name="genre_name" class="vaidate" required>
-                    <option value="" disabled selected>Choose Genre</option>
+                    <select id="category_name" name="category_name" class="vaidate" required>
+                    <option value="category_name">Choose category</option>
                     {% for category in category %}
                         <option value="{{ category.category_name }}">{{ category.category_name }}</option>
                     {% endfor %}
@@ -41,17 +41,17 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-file-alt prefix light-blue-text text-darken-4"></i>                    
-                    <textarea id="book_review" name="book_review" minlength="20" 
+                    <textarea id="review" name="review" minlength="20" 
                     maxlength="500" class="materialize-textarea validate" required></textarea>
-                    <label for="book_review">Book Review</label>
+                    <label for="review">Book Review</label>
                 </div>
             </div>
             <!-- star rating -->
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-star prefix light-blue-text text-darken-4"></i>
-                    <input id="book_rating" name="book_rating" type="number" min="1" max="5" class="validate" required>
-                    <label for="book_rating">Star Rating (out of five)</label>
+                    <input id="rating" name="rating" type="number" min="1" max="5" class="validate" required>
+                    <label for="rating">Star Rating (out of five)</label>
                 </div>
             </div>
             <!-- image URL -->
