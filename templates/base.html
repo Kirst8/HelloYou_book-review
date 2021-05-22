@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" 
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400&display=swap" rel="stylesheet">
+   <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">   
     <link rel="icon" type="image/png" href="/static/images/favicon.png"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     {% block styles %}
@@ -18,7 +19,7 @@
 
     <header>
         <!-- top navbar -->
-        <nav class="nav-extended bg-grey">
+        <nav class="nav grey darken-3">
             <div class="nav-wrapper">
                 <a href="{{ url_for('home_page') }}" class="brand-logo">HelloYou</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
@@ -75,7 +76,7 @@
         {% endblock %}
     </main>
 
-    <footer class="page-footer contrastBG">
+    <footer class="page-footer grey darken-3">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
