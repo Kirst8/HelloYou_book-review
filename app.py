@@ -342,8 +342,8 @@ def edit_catergory(category_id):
     return redirect(url_for("login"))
 
 
-@app.route("/delete_genre/<genre_id>")
-def delete_genre(genre_id):
+@app.route("/delete_category/<category_id>")
+def delete_category(category_id):
     """delete_genre:
     * Allows admin to remove genre.
     \n Args:
