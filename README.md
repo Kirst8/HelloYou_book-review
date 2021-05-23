@@ -93,18 +93,25 @@ Here is a list of all the technologies used throughout the project!
 Balsamiq Mockups 3
 I have used Balsamiq to create my wireframes.
 [wireframes.pdf](https://github.com/Kirst8/HelloYou_book-review/files/6527605/wireframes.pdf)
+
 Python3
 I have used Python3 to create my server-side application.
+
 HTML5
 I use HTML to create the basic structure of my book review website.
+
 CSS3
 CSS gives my site its look and style.
+
 JQuery
 JQuery is used to initialize a few components and generally improve user experience.
+
 Flask
 I have utilised the flask micro-framework to speed up the overall process. I have also used multiple modules such as flask-pymongo, flask-paginate, session and many more.
+
 MongoDB
 I have chosen to use MongoDB as my database as this is what I feel most comfortable using.
+
 Font Awesome
 Font Awesome was used for all of my icons.
  ⤴️
