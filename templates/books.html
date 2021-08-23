@@ -28,33 +28,33 @@
         </div>
     </div>
 
-    {% if allbooks|length > 0 %}
+    {% if books|length > 0 %}
     <div class="container">
         <div class="row">
-            {% for allbooks in allbooks %}
+            {% for books in books %}
             <div class="col s12 m6 14">
                 <div class="card large hoverable books">
                     <!-- Book image -->
                      <div class="card-image books waves-effect waves-block waves-light">
-                        <img class="activator" src="{{ allbooks.image_url }}" />
+                        <img class="activator" src="{{ books.image_url }}" />
                     </div>
                     <div class="card-action">
-                        <span class="card-title activator grey-text text-darken-4"><h5>{{ allbooks.book_title }}: by {{ allbooks.author }}</h5><i
+                        <span class="card-title activator grey-text text-darken-4"><h5>{{ books.book_title }}: by {{ books.author }}</h5><i
                                 class="fa fa-ellipsis-v right"></i></span>
                     </div>
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4"><i class="fa fa-times right"></i></span>
-                        <h5>{{ allbooks.book_title }}: by {{ allbooks.author }}</h5>
+                        <h5>{{ books.book_title }}: by {{ books.author }}</h5>
                         category: {{ allbooks.category }}<br>
-                        <i class="fas fa-star"></i> Rating: {{ allbooks.rating }} /5<br>
+                        <i class="fas fa-star"></i> Rating: {{ books.rating }} /5<br>
                         <p>
                             Review: <br>
-                            {{ allbooks.review }}
+                            {{ books.review }}
                         </p>
-                        <p><em>by: {{ allbooks.created_by }} </em></p>
+                        <p><em>by: {{ books.created_by }} </em></p>
                         <!-- buy button shows where a value exists, can only be added by "admin" -->
                             {% if allbooks.buy_link != null %}
-                                <a href="{{ allbooks.buy_link }}" class="btn-small green waves-effect waves-green"
+                                <a href="{{ books.buy_link }}" class="btn-small green waves-effect waves-green"
                                     target="_blank"><i class="fas fa-shopping-basket left"></i>Buy</a>
                             {% endif %}
                         <!-- Buy, Remove and Edit buttons with Admin having full access -->
@@ -74,7 +74,7 @@
                 </div>
                 <div class="modal-footer">
                     <a href="{{ url_for('get_books') }}" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
-                    <a href="{{ url_for('delete_book', allbooks_id=allbooks._id) }} " class="waves-effect waves-green btn-flat">Delete</a>
+                    <a href="{{ url_for('delete_book', books_id=books._id) }} " class="waves-effect waves-green btn-flat">Delete</a>
                 </div>
             </div>
             

@@ -29,8 +29,8 @@ def home_page():
 @app.route("/")
 @app.route("/get_books")
 def get_books():
-    allbooks = list(mongo.db.allbooks.find())
-    return render_template("books.html", allbooks=allbooks)
+    allbooks = list(mongo.db.books.find())
+    return render_template("books.html", books=books)
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -47,7 +47,7 @@ def search():
 
     query = request.form.get("query")
     allbooks = list(mongo.db.allbooks.find({"$text": {"$search": query}}))
-    return render_template("books.html", allbooks=allbooks)
+    return render_template("books.html", books=books)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -142,9 +142,9 @@ def profile(username):
         username = mongo.db.users.find_one(
             {"username": session["user"]})["username"]
         if session["user"] == username:
-            allbooks = list(mongo.db.allbooks.find({"created_by": username}))
+            allbooks = list(mongo.db.books.find({"created_by": username}))
             return render_template("profile.html",
-                                   allbooks=allbooks, username=username)
+                                   books=books, username=username)
 
         return redirect(url_for("get_books"))
 
@@ -177,7 +177,7 @@ def add_review():
 
     if "user" in session:
         if request.method == "POST":
-            allbooks = {
+            books = {
                 "category_name": request.form.get("category_name"),
                 "book_title": request.form.get("book_title"),
                 "author": request.form.get("author"),
@@ -187,7 +187,7 @@ def add_review():
                 "buy_link": request.form.get("buy_link"),
                 "created_by": session["user"]
             }
-            mongo.db.books.insert_one(allbooks)
+            mongo.db.books.insert_one(books)
             flash("Review Successfully Added")
             return redirect(url_for("get_books"))
 
@@ -197,7 +197,7 @@ def add_review():
     return redirect(url_for("login"))
 
 
-@app.route("/edit_book/<allbooks_id>", methods=["GET", "POST"])
+@app.route("/edit_book/<books_id>", methods=["GET", "POST"])
 def edit_book(allbooks_id):
     """edit_book:
     * Allows user to submit changes to own review.
@@ -212,8 +212,8 @@ def edit_book(allbooks_id):
     if "user" in session:
         username = mongo.db.users.find_one(
             {"username": session["user"]})["username"]
-        allbooks = mongo.db.allbooks.find_one({"_id": ObjectId(allbooks_id)})
-        if allbooks["created_by"] == username or session["user"] == "admin":
+        books = mongo.db.books.find_one({"_id": ObjectId(allbooks_id)})
+        if books["created_by"] == username or session["user"] == "admin":
             if request.method == "POST":
                 submit = {
                     "category_name": request.form.get("category_name"),
@@ -230,7 +230,7 @@ def edit_book(allbooks_id):
 
             category = mongo.db.genres.find().sort("category_name", 1)
             return render_template(
-                "edit_review.html", allbooks=allbooks,
+                "edit_review.html", books=books,
                 genres=genres)
 
         return redirect(url_for("get_books"))
