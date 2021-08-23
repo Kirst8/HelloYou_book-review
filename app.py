@@ -30,7 +30,7 @@ def home_page():
 @app.route("/get_books")
 def get_books():
     allbooks = list(mongo.db.books.find())
-    return render_template("books.html", books=books)
+    return render_template("books.html", book=books)
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -46,7 +46,7 @@ def search():
     """
 
     query = request.form.get("query")
-    allbooks = list(mongo.db.allbooks.find({"$text": {"$search": query}}))
+    books = list(mongo.db.books.find({"$text": {"$search": query}}))
     return render_template("books.html", books=books)
 
 
@@ -198,7 +198,7 @@ def add_review():
 
 
 @app.route("/edit_book/<books_id>", methods=["GET", "POST"])
-def edit_book(allbooks_id):
+def edit_book(books_id):
     """edit_book:
     * Allows user to submit changes to own review.
     * Allows admin to allow update reviews and post\
@@ -212,7 +212,7 @@ def edit_book(allbooks_id):
     if "user" in session:
         username = mongo.db.users.find_one(
             {"username": session["user"]})["username"]
-        books = mongo.db.books.find_one({"_id": ObjectId(allbooks_id)})
+        books = mongo.db.books.find_one({"_id": ObjectId(books_id)})
         if books["created_by"] == username or session["user"] == "admin":
             if request.method == "POST":
                 submit = {
@@ -225,7 +225,7 @@ def edit_book(allbooks_id):
                     "buy_link": request.form.get("buy_link"),
                     "created_by": session["user"]
                 }
-                mongo.db.books.update({"_id": ObjectId(allbooks_id)}, submit)
+                mongo.db.books.update({"_id": ObjectId(books_id)}, submit)
                 flash("Review Successfully Updated")
 
             category = mongo.db.genres.find().sort("category_name", 1)
@@ -238,8 +238,8 @@ def edit_book(allbooks_id):
     return redirect(url_for("login"))
 
 
-@app.route("/delete_book/<allbooks_id>")
-def delete_book(allboosk_id):
+@app.route("/delete_book/<books_id>")
+def delete_book(books_id):
     """delete_book:
     * Allows user to delete own review.
     * Allows admin to delete book reviews.
@@ -252,10 +252,10 @@ def delete_book(allboosk_id):
     if "user" in session:
         username = mongo.db.users.find_one(
             {"username": session["user"]})["username"]
-        allbooks = mongo.db.allbooks.find_one({"_id": ObjectId(allbooks_id)})
-        if allbooks["created_by"] == username or session["user"] == "admin":
+        books = mongo.db.books.find_one({"_id": ObjectId(books_id)})
+        if books["created_by"] == username or session["user"] == "admin":
 
-            mongo.db.books.remove({"_id": ObjectId(allbooks_id)})
+            mongo.db.books.remove({"_id": ObjectId(books_id)})
             flash("Book Review Successfully Deleted")
             return redirect(url_for("get_books"))
 
