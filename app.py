@@ -190,8 +190,8 @@ def add_review():
             flash("Review Successfully Added")
             return redirect(url_for("get_books"))
 
-        genres = mongo.db.genres.find().sort("genre_name", 1)
-        return render_template("add_review.html", genres=genres)
+        category = mongo.db.genres.find().sort("category_name", 1)
+        return render_template("add_review.html", category=category)
 
     return redirect(url_for("login"))
 
@@ -277,7 +277,7 @@ def get_category():
     if "user" in session:
         if session["user"] == "admin":
 
-            category = list(mongo.db.genres.find().sort("category_name", 1))
+            category = list(mongo.db.category.find().sort("category_name", 1))
             return render_template("category.html", category=category)
 
         return redirect(url_for("get_books"))
@@ -292,13 +292,13 @@ def add_Catergory():
     \n Args:
     * None.
     \n Returns:
-    * Posts new genre to MongoDB and confirms successful.
+    * Posts new category to MongoDB and confirms successful.
     """
 
     if "user" in session:
         if session["user"] == "admin":
             if request.method == "POST":
-                genre = {
+                category = {
                     "category_name": request.form.get("category_name")
                 }
                 mongo.db.genres.insert_one(category)
@@ -317,7 +317,7 @@ def edit_catergory(category_id):
     """edit_cat:
     * Allows admin to update category html 
     \n Args:
-    * genre_id
+    * category_id
     \n Returns:
     * Updated genre and confirmation message if successful.
     """
@@ -344,11 +344,11 @@ def edit_catergory(category_id):
 @app.route("/delete_category/<category_id>")
 def delete_category(category_id):
     """delete_genre:
-    * Allows admin to remove genre.
+    * Allows admin to remove category.
     \n Args:
     * genre_id
     \n Returns:
-    * Deletes genre and confirms if it was succesful.
+    * Deletes category and confirms if it was succesful.
     """
 
     if "user" in session:
