@@ -29,7 +29,7 @@ def home_page():
 @app.route("/get_books")
 def get_books():
     books = list(mongo.db.books.find())
-    return render_template("books.html", book=books)
+    return render_template("books.html", books=books)
 
 
 @app.route("/search", methods=["GET", "POST"])

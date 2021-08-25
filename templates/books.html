@@ -53,7 +53,7 @@
                         </p>
                         <p><em>by: {{ books.created_by }} </em></p>
                         <!-- buy button shows where a value exists, can only be added by "admin" -->
-                            {% if allbooks.buy_link != null %}
+                            {% if books.buy_link != null %}
                                 <a href="{{ books.buy_link }}" class="btn-small green waves-effect waves-green"
                                     target="_blank"><i class="fas fa-shopping-basket left"></i>Buy</a>
                             {% endif %}

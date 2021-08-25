@@ -12,7 +12,7 @@
                 <div class="input-field col s12">
                     <i class="fas fa-filter prefix light-blue-text text-darken-4"></i>
                     <select id="category_name" name="category_name" class="vaidate" required>
-                    <option value="" disabled>Choose Genre</option>
+                    <option value="" disabled>Choose category</option>
                     {% for category in category %}
                         {% if category.category_name == book.category_name %}
                             <option value="{{ category.category_name }}" selected>{{ category.category_name }}</option>
@@ -21,7 +21,7 @@
                         {% endif %}
                     {% endfor %}
                     </select>
-                    <label>Book Genre</label>
+                    <label>Book category</label>
                 </div>
             </div>
             <!-- book title -->
@@ -29,7 +29,7 @@
                 <div class="input-field col s12">
                     <i class="fas fa-book prefix light-blue-text text-darken-4"></i>
                     <input id="book_title" name="book_title" minlength="5" maxlength="100"
-                        value="{{ allbooks.book_title }}" type="text" class="validate" required>
+                        value="{{ books.book_title }}" type="text" class="validate" required>
                     <label for="book_title">Book Title</label>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                 <div class="input-field col s12">
                     <i class="fas fa-user-check prefix light-blue-text text-darken-4"></i>
                     <input id="author" name="author" minlength="1" maxlength="100"
-                    value="{{ allbooks.author }}" type="text" class="validate" required>
+                    value="{{ books.author }}" type="text" class="validate" required>
                     <label for="author">Author</label>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                 <div class="input-field col s12">
                     <i class="fas fa-file-alt prefix light-blue-text text-darken-4"></i>                    
                     <textarea id="book_review" name="book_review" minlength="20" 
-                    maxlength="500" class="materialize-textarea validate" required>{{- allbooks.review -}}</textarea>
+                    maxlength="500" class="materialize-textarea validate" required>{{- books.review -}}</textarea>
                     <label for="review">Book Review</label>
                 </div>
             </div>
