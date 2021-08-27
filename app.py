@@ -141,7 +141,7 @@ def profile(username):
         username = mongo.db.users.find_one(
             {"username": session["user"]})["username"]
         if session["user"] == username:
-            allbooks = list(mongo.db.books.find({"created_by": username}))
+            books = list(mongo.db.books.find({"created_by": username}))
             return render_template("profile.html",
                                    books=books, username=username)
 
@@ -227,10 +227,10 @@ def edit_book(books_id):
                 mongo.db.books.update({"_id": ObjectId(books_id)}, submit)
                 flash("Review Successfully Updated")
 
-            category = mongo.db.genres.find().sort("category_name", 1)
+            category = mongo.db.category.find().sort("category_name", 1)
             return render_template(
                 "edit_review.html", books=books,
-                genres=genres)
+                category=category)
 
         return redirect(url_for("get_books"))
 
