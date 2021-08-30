@@ -329,11 +329,11 @@ def edit_catergory(category_id):
                 submit = {
                     "category_name": request.form.get("category_name")
                 }
-                mongo.db.genres.update({"_id": ObjectId(genre_id)}, submit)
-                flash("Genre Successfully Updated")
-                return redirect(url_for("get_genres"))
+                mongo.db.category.update({"_id": ObjectId(category_id)}, submit)
+                flash("category Successfully Updated")
+                return redirect(url_for("get_category"))
 
-            genre = mongo.db.genres.find_one({"_id": ObjectId(category_id)})
+            category= mongo.db.category.find_one({"_id": ObjectId(category_id)})
             return render_template("edit_catergory.html", category=category)
 
         return redirect(url_for("get_books"))

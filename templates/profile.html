@@ -21,7 +21,7 @@
             {% for books in books %}
             <div class="col s12 m6 l4 offset-m1">
                 <div class="card large hoverable books">
-                    <!-- Need to check with tutor support how to fix this -->
+                    <!-- Need to fix -->
                     <div class="card-image books waves-effect waves-block waves-light">
                         <img class="activator" src="{{ books.image_url }}">
                     </div>
@@ -40,7 +40,7 @@
                         </p>
                         <p><em>by: {{ books.created_by }} </em></p>
                         <!-- Remove and Edit buttons -->
-                        {% if session.user|lower == book.created_by|lower %}
+                        {% if session.user|lower == books.created_by|lower %}
                         <a href="#a{{ books._id }}" class="btn-small red accent-4 modal-trigger"><i class="fas fa-trash-alt left"></i>Delete</a>
                         <a href="{{ url_for('edit_book', books_id=books._id) }}"
                             class="btn-small light-blue accent-4"><i class="fas fa-edit left"></i>Edit</a>
