@@ -18,12 +18,12 @@
     {% if books|length > 0 %}
     <div class="container wide-container">
         <div class="row">
-            {% for book in books %}
+            {% for books in books %}
             <div class="col s12 m6 l4 offset-m1">
                 <div class="card large hoverable books">
                     <!-- Need to check with tutor support how to fix this -->
                     <div class="card-image books waves-effect waves-block waves-light">
-                        <img class="activator" src="{{ books.image_url }}"
+                        <img class="activator" src="{{ books.image_url }}">
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4">Expand review details<i
@@ -65,8 +65,7 @@
         </div>
     </div>
     {% else %}    
-    
-    <div class="container">
+<div class="container">
         <div class="row">
             <div class="col s6 offset-s3">
                 <div class="card">
