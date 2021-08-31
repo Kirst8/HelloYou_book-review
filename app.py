@@ -286,7 +286,7 @@ def get_category():
 
 
 @app.route("/add_category", methods=["GET", "POST"])
-def add_Catergory():
+def add_catergory():
     """add_cat:
     * Allows admin to add new category.
     \n Args:
