@@ -10,14 +10,10 @@
             <!-- book cat selection -->
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="fas fa-filter prefix light-blue-text text-darken-4"></i>
-                    <select id="category_name" name="category_name" class="vaidate" required>
-                    <option value="category_name">Choose category</option>
-                    {% for category in category %}
-                        <option value="{{category.category_name}}">{{ category.category_name }}</option>
-                    {% endfor %}
-                    </select>
-                    <label>Book category</label>
+                    <i class="fas fa-book prefix light-blue-text text-darken-4"></i>
+                    <input id="category_name" name="category_name" minlength="5" maxlength="100"
+                    type="text" class="validate" required>
+                    <label for="category_name">category name</label>
                 </div>
             </div>
             <!-- book title -->
