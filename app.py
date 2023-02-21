@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
-app.secret_key = os.environ.get("SECRET_KEY")
+app.secret_key = os.environ.get("secret_key")
 
 
 mongo = PyMongo(app)
@@ -402,7 +402,9 @@ def service_unavailable(e):
     return render_template("error.html"), 503
 
 # change to debug=False before submission!
+
 if __name__ == "__main__":
-       app.run(host=os.environ.get("IP"),
-            port=int(os.environ.get("PORT")),
-            debug=os.environ.get("DEBUG"))
+       app.run(host=os.environ.get("IP")),
+       port=("0.0.0.0"),
+       debug=os.environ.get("TRUE")
+           
