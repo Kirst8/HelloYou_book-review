@@ -406,5 +406,5 @@ def service_unavailable(e):
 if __name__ == "__main__":
        app.run(host=os.environ.get("IP")),
        port=("0.0.0.0"),
-       debug=os.environ.get("TRUE")
+       debug=os.environ.get("FALSE")
            
